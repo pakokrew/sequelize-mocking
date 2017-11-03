@@ -14,15 +14,15 @@ const _DatabaseInstance = require('./_instance');
 /**
  * Database methods
  */
+
+let instance = null;
 class Database {
     /**
      * @returns {Sequelize}
      */
     static getInstance() {
-        let instance = _DatabaseInstance.getCurrentInstance();
-
         if (!instance) {
-            instance = _DatabaseInstance.setCurrentInstance(new Sequelize('my-database', 'mysqlUserName', 'mysqlUserPassword', {
+            instance = new Sequelize('my-database', 'mysqlUserName', 'mysqlUserPassword', {
                 'host': 'localhost',
                 'dialect': 'mysql',
                 'define': {
@@ -38,7 +38,7 @@ class Database {
                 'query': {
                     'raw': true
                 }
-            }));
+            });
         }
 
         return instance;
